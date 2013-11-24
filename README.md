@@ -1,10 +1,25 @@
 ## Launch SBML Online Validator
 This project hosts a simple web automation project, that enables SBW modules to send SBML models over to the SBML Online Validator. This is definitely convenient: 
 
+![Launch SBML Online Validator](https://raw.github.com/fbergmann/LaunchOnlineValidator/master/images/LaunchOnlineValidator.png)
+
+If you launch the executable directly, it will open the SBML Online Validator. And if you launch the executable with an SBML file, that file will be send to the Validator. 
+
 ## Implementation 
 Well to be honest, this project really just has a couple of lines of code. All the magic is actually leveraged by a nuget package `WatiN.2.1.0`. And whilte theoretically it would support a number of browsers, I could only get IE to work reliably for now. Then the magic happens in just one function: 
 
+        public static void ValidateSBML(string sbml)
+        {
+            var browser = new IE("http://sbml.org/validator");
+            browser.TextField(Find.ByName("rawSBML")).Value =
+                            sbml;
 
+            var link = 
+                browser.
+                    Links.FirstOrDefault(s => s.Url.Contains("fromPaste"));
+            if (link != null)
+                link.Click();
+        }
 
 ## License 
 This project is open source and freely available under the [Simplified BSD](http://opensource.org/licenses/BSD-2-Clause) license. Should that license not meet your needs, please contact me. 
