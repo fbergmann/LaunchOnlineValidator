@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Launch SBML Online Validator : SBW Module, sending an SBML model to the SBML Online Validator" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Launch SBML Online Validator</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/fbergmann/LaunchOnlineValidator">View on GitHub</a>
+
+          <h1 id="project_title">Launch SBML Online Validator</h1>
+          <h2 id="project_tagline">SBW Module, sending an SBML model to the SBML Online Validator</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/fbergmann/LaunchOnlineValidator/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/fbergmann/LaunchOnlineValidator/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>
+<a name="launch-sbml-online-validator" class="anchor" href="#launch-sbml-online-validator"><span class="octicon octicon-link"></span></a>Launch SBML Online Validator</h2>
+
+<p>This project hosts a simple web automation project, that enables SBW modules to send SBML models over to the SBML Online Validator. This is definitely convenient: </p>
+
+<p><img src="https://raw.github.com/fbergmann/LaunchOnlineValidator/master/images/LaunchOnlineValidator.png" alt="Launch SBML Online Validator"></p>
+
+<p>If you launch the executable directly, it will open the SBML Online Validator. And if you launch the executable with an SBML file, that file will be send to the Validator. </p>
+
+<p>Downloads are as always hosted by SourceForge, the current version is: </p>
+
+<p><a href="http://sourceforge.net/projects/sbw/files/modules/LaunchOnlineValidator/SetupSBMLValidator_1.0.exe/download">http://sourceforge.net/projects/sbw/files/modules/LaunchOnlineValidator/SetupSBMLValidator_1.0.exe/download</a></p>
+
+<h2>
+<a name="implementation" class="anchor" href="#implementation"><span class="octicon octicon-link"></span></a>Implementation</h2>
+
+<p>Well to be honest, this project really just has a couple of lines of code. All the magic is actually leveraged by a nuget package <code>WatiN.2.1.0</code>. And whilte theoretically it would support a number of browsers, I could only get IE to work reliably for now. Then the magic happens in just one function: </p>
+
+<pre><code>    public static void ValidateSBML(string sbml)
+    {
+        var browser = new IE("http://sbml.org/validator");
+        browser.TextField(Find.ByName("rawSBML")).Value =
+                        sbml;
+
+        var link = 
+            browser.
+                Links.FirstOrDefault(s =&gt; s.Url.Contains("fromPaste"));
+        if (link != null)
+            link.Click();
+    }
+</code></pre>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>This project is open source and freely available under the <a href="http://opensource.org/licenses/BSD-2-Clause">Simplified BSD</a> license. Should that license not meet your needs, please contact me. </p>
+
+<p>Copyright (c) 2013, Frank T. Bergmann<br>
+All rights reserved.</p>
+
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met: </p>
+
+<ol>
+<li>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer. </li>
+<li>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution. </li>
+</ol><p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Launch SBML Online Validator maintained by <a href="https://github.com/fbergmann">fbergmann</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
