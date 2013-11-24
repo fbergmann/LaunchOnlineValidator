@@ -5,6 +5,10 @@ This project hosts a simple web automation project, that enables SBW modules to 
 
 If you launch the executable directly, it will open the SBML Online Validator. And if you launch the executable with an SBML file, that file will be send to the Validator. 
 
+Downloads are as always hosted by SourceForge, the current version is: 
+
+[http://sourceforge.net/projects/sbw/files/modules/LaunchOnlineValidator/SetupSBMLValidator_1.0.exe/download](http://sourceforge.net/projects/sbw/files/modules/LaunchOnlineValidator/SetupSBMLValidator_1.0.exe/download)
+
 ## Implementation 
 Well to be honest, this project really just has a couple of lines of code. All the magic is actually leveraged by a nuget package `WatiN.2.1.0`. And whilte theoretically it would support a number of browsers, I could only get IE to work reliably for now. Then the magic happens in just one function: 
 
