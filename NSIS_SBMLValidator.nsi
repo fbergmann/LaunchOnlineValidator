@@ -42,13 +42,13 @@ ShowUnInstDetails show
 Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
-  File "bin\Debug\WatiN.Core.dll"
-  File "bin\Debug\SBWCSharp.dll"
-  File "bin\Debug\Interop.SHDocVw.dll"
+  File "bin\WatiN.Core.dll"
+  File "bin\SBWCSharp.dll"
+  File "bin\Interop.SHDocVw.dll"
+  File "bin\SBMLValidator.exe"
   CreateDirectory "$SMPROGRAMS\Systems Biology Workbench\Utilities"
   CreateShortCut "$SMPROGRAMS\Systems Biology Workbench\Utilities\SBML Validator (SBW).lnk" "$INSTDIR\SBMLValidator.exe"
   CreateShortCut "$DESKTOP\SBML Validator (SBW).lnk" "$INSTDIR\SBMLValidator.exe"
-  File "bin\Debug\SBMLValidator.exe"
   ExecWait '"$INSTDIR\SBMLValidator.exe" -sbwregister'
 
 SectionEnd
